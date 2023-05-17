@@ -1,13 +1,13 @@
-const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../../models');
+const router = require("express").Router();
+const { Product, Category, Tag, ProductTag } = require("../../models");
 
 // The `/api/products` endpoint
 
 // get all products
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const productData = await Product.findAll({
-      include: [{ model: Category }, { model: Tag}],
+      include: [{ model: Category }, { model: Tag }],
     });
     res.status(200).json(productData);
   } catch (err) {
@@ -16,10 +16,10 @@ router.get('/', async (req, res) => {
 });
 
 // get one product
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const productData = await Product.findByPk(req.params.id, {
-      include: [{ model: Category }, { model: Tag}],
+      include: [{ model: Category }, { model: Tag }],
     });
 
     if (!productData) {
@@ -33,9 +33,8 @@ router.get('/:id', async (req, res) => {
 });
 
 // create new product
-router.post('/', async (req, res) => {
-   
-    const productData = await Product.create(req.body)
+router.post("/", async (req, res) => {
+  const productData = await Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
@@ -54,11 +53,11 @@ router.post('/', async (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(400).json(err);
-    }); 
+    });
 });
 
 // update product
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   // update product data
   await Product.update(req.body, {
     where: {
@@ -99,8 +98,8 @@ router.put('/:id', async (req, res) => {
     });
 });
 
-router.delete('/:id', async (req, res) => {
-  try{
+router.delete("/:id", async (req, res) => {
+  try {
     const productData = await Product.destroy({
       where: {
         id: req.params.id,
@@ -108,7 +107,7 @@ router.delete('/:id', async (req, res) => {
     });
 
     if (!productData) {
-      res.status(404).json({ message: 'No product was found with that id!'});
+      res.status(404).json({ message: "No product was found with that id!" });
       return;
     }
 

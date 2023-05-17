@@ -1,11 +1,11 @@
-const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('../../models');
+const router = require("express").Router();
+const { Tag, Product, ProductTag } = require("../../models");
 
 // Gets all Tags
-router.get('/', async  (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const tagData = await  Tag.findAll({
-      include: [{ model: Product}],
+    const tagData = await Tag.findAll({
+      include: [{ model: Product }],
     });
     res.status(200).json(tagData);
   } catch (err) {
@@ -13,14 +13,14 @@ router.get('/', async  (req, res) => {
   }
 });
 // Gets one tag
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const tagData = await Tag.findByPk(req.params.id, {
-      include:  [{ model: Product}],
+      include: [{ model: Product }],
     });
 
     if (!tagData) {
-      res.status(404).json({ message: 'No tag found with that id!'});
+      res.status(404).json({ message: "No tag found with that id!" });
       return;
     }
 
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 // Creates new tag
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const tagData = await Tag.create(req.body);
     res.status(200).json(tagData);
@@ -39,20 +39,20 @@ router.post('/', async (req, res) => {
   }
 });
 // Updates tag
-router.put('/:id', async (req, res) => {
-  try{
-  await Tag.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-  });
-  res.status(200).json('UPDATED');
-} catch (err) {
+router.put("/:id", async (req, res) => {
+  try {
+    await Tag.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json("UPDATED");
+  } catch (err) {
     res.status(404).json(err);
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const tagData = await Tag.destroy({
       where: {
@@ -61,7 +61,7 @@ router.delete('/:id', async (req, res) => {
     });
 
     if (!tagData) {
-      res.status(404).json({ message: 'No tag found with that id!'});
+      res.status(404).json({ message: "No tag found with that id!" });
       return;
     }
 
