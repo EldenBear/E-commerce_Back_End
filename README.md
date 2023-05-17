@@ -2,8 +2,9 @@
 
 ## Description
 ```
-This API allows the user to get data for a company through API requests. It also allows the user to do things such as
-update, create, and delete tags, products, and categories. 
+This API allows the user to get data for a company through API requests.
+It also allows the user to do things such as update, create, and delete 
+tags, products, and categories. 
 ```
 
 
