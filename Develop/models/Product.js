@@ -32,6 +32,7 @@ Product.init(
     },
     category_id: {
       type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
       refrences:  {
         model: 'Category',
         key: 'id',
